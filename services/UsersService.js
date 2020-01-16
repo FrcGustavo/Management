@@ -45,7 +45,7 @@ class UsersService  {
     }
 
     async getUsers() {
-        const users = await this.user.findAll();
+        const users = await this.user.findAll({ order: ['key'] });
         return users; 
     }
 

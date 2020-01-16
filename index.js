@@ -8,6 +8,7 @@ const { port } = require('./config');
 
 const AuthRoutes = require('./routes/AuhtRoutes');
 const CategoryRoutes = require('./routes/CategoryRoutes');
+const ArticleRoutes = require('./routes/ArticleRoutes');
 
 app.use(cors('*'))
 app.use(morgan('dev'));
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 AuthRoutes(app);
+ArticleRoutes(app);
 CategoryRoutes(app);
 
 app.listen(port, () => console.log(`Server is runing in port: ${port}`));

@@ -6,7 +6,7 @@ class CategoriesService {
     }
 
     async findAll() {
-        const categories = await this.category.findAll();
+        const categories = await this.category.findAll({ order: ['key'] });
         return categories;
     }
 

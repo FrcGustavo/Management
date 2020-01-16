@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize= new Sequelize(
+const sequelize = new Sequelize(
     'dbmanager',
     'platzi',
     'platzi',
@@ -15,6 +15,5 @@ const sequelize= new Sequelize(
         logging: true
     }
 );
-
 
 module.exports = sequelize;
