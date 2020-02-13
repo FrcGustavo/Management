@@ -10,6 +10,7 @@ const AuthRoutes = require('./routes/AuhtRoutes');
 const CategoryRoutes = require('./routes/CategoryRoutes');
 const ArticleRoutes = require('./routes/ArticleRoutes');
 const ClientRoutes = require('./routes/ClientRoutes');
+const OrderRoutes = require('./routes/OrderRoutes');
 
 app.use(cors('*'))
 app.use(morgan('dev'));
@@ -20,5 +21,6 @@ AuthRoutes(app);
 ArticleRoutes(app);
 CategoryRoutes(app);
 ClientRoutes(app);
+OrderRoutes(app);
 
 app.listen(port, () => console.log(`Server is runing in port: ${port}`));
