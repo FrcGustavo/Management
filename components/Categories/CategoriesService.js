@@ -1,4 +1,4 @@
-const category = require('../models/CategoriesModel');
+const category = require('./CategoriesModel');
 
 class CategoriesService {
     constructor() {
@@ -6,12 +6,12 @@ class CategoriesService {
     }
 
     async findAll() {
-        const categories = await this.category.findAll({ order: ['key'] });
+        const categories = await this.category.findAll({ order: ['category_key'] });
         return categories;
     }
 
     async findCategory(categoryId) {
-        const category = await this.category.findOne({ where: { key: categoryId }});
+        const category = await this.category.findOne({ where: { category_key: categoryId }});
         return category;
     }
 
@@ -26,7 +26,7 @@ class CategoriesService {
     }
 
     async countCategories() {
-        const count = await this.category.count({ col: "key"});
+        const count = await this.category.count({ col: "category_key"});
         return count;
     }
 }

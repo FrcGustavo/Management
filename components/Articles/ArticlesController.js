@@ -1,4 +1,4 @@
-const ArticlesService = require('../services/ArticlesService');
+const ArticlesService = require('./ArticlesService');
 
 class ArticlesController {
     constructor() {

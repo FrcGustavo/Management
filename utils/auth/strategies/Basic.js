@@ -2,7 +2,7 @@ const passport = require('passport');
 const { BasicStrategy } = require('passport-http');
 const bcrypt = require('bcrypt');
 
-const UsersService = require('../../../services/UsersService');
+const UsersService = require('../../../components/Users/service');
 
 passport.use(
     new BasicStrategy(

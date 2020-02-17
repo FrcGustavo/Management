@@ -1,18 +1,18 @@
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(
     'dbmanager',
-    'platzi',
-    'platzi',
+    'root',
+    '123456',
     {
         host: 'localhost',
-        dialect: 'postgres',
+        dialect: 'mysql',
         pool: {
             max: 5,
             min: 0,
             require: 30000,
             idle: 10000
         },
-        logging: true
+        logging: false
     }
 );
 

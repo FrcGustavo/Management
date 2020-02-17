@@ -1,6 +1,6 @@
 const passport = require('passport');
 const { Strategy, ExtractJwt } = require('passport-jwt');
-const UserService = require('../../../services/UsersService');
+const UserService = require('../../../components/Users/service');
 const config = require('../../../config/index');
 
 passport.use(
@@ -19,6 +19,7 @@ passport.use(
                 delete user.password;
                 cb(null, { ...user, scopes: tokenPayload.scopes });
             } catch (error) {
+                console.log('[ERROR AUTHENTICATE JWT]', error.message);
                 cb(error);
             }
         }

@@ -1,4 +1,4 @@
-const CategoriesService = require('../services/CategoriesService');
+const CategoriesService = require('./CategoriesService');
 
 class CategoriesController {
     constructor() {

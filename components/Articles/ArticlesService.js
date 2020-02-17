@@ -1,4 +1,4 @@
-const ArticlesModel = require('../models/ArticlesModel');
+const ArticlesModel = require('./ArticlesModel');
 
 class ArticlesService {
     constructor() {
@@ -6,12 +6,12 @@ class ArticlesService {
     }
 
     async findAll() {
-        const articles = await this.article.findAll({ include: ["Category"] });
+        const articles = await this.article.findAll({ include: ["category"] });
         return articles;
     }
     
     async finOne(articleKey) {
-        const article = await this.article.findOne({ where: { key: articleKey }, include: ["Category"] });
+        const article = await this.article.findOne({ where: { article_key: articleKey }, include: ["category"] });
         return article;
 
     }
