@@ -67,30 +67,35 @@ CREATE TABLE clients (
 INSERT INTO clients(client_key, name, avatar, email) VALUES
 ('C00001','Goguinara sa de cv', 'avatar', 'goguinara@mail.com');
 
-CREATE TABLE "Orders" (
-    "id" SERIAL NOT NULL PRIMARY KEY,
-    "key" VARCHAR(6) NOT NULL UNIQUE,
-    "ClientId" INTEGER NOT NULL,
-    "totalPrice" FLOAT PRECISION NOT NULL,
-    "totalArticles" INTEGER NOT NULL,
-    "deliveryDate" timestamp with time zone NOT NULL,
-    "createdAt" timestamp with time zone NOT NULL,
-    "updatedAt" timestamp with time zone NOT NULL
-    FOREIGN KEY ("ClientId") REFERENCES Clients("id");
+CREATE TABLE orders (
+    order_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    order_key VARCHAR(6) NOT NULL UNIQUE,
+    client_id INTEGER NOT NULL,
+    totalPrice DOUBLE NOT NULL,
+    totalArticles INTEGER NOT NULL,
+    deliveryDate TIMESTAMP NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (client_id) REFERENCES clients(client_id)
 )
 
+INSERT INTO orders(order_key, client_id, totalPrice, totalArticles, deliveryDate) VALUES
+("O00001", 1, 0, 2, "2020-02-18 00:00.000")
 
-CREATE TABLE "OrderArticles" (
-    "id" SERIAL NOT NULL PRIMARY KEY,
-    "key" VARCHAR(6) NOT NULL UNIQUE,
-    "OrderId" INTEGER NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "category" VARCHAR(255) NOT NULL,
-    "unity" VARCHAR(6) NOT NULL,
-    "count" INTEGER NOT NULL,
-    "price" FLOAT NOT NULL,
-    "totalPrice" FLOAT NOT NULL,
-    "createdAt" timestamp with time zone NOT NULL,
-    "updatedAt" timestamp with time zone NOT NULL,
-    FOREIGN KEY ("OrderId") REFERENCES "Orders"("id");
+CREATE TABLE order_articles (
+    article_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    order_id INTEGER NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    unity ENUM('kg', 'pz'),
+    count INTEGER NOT NULL,
+    price DOUBLE NOT NULL,
+    totalPrice DOUBLE NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
 )
+
+INSERT INTO order_articles(order_id, name, category, unity, count, price, totalPrice) VALUES
+(1, 'Pera Verde', 'Bodegas', 'kg', 1.5, 37.5, 65),
+(1, 'Aguacate', 'Subasta', 'kg', 2, 40.5, 81);

@@ -1,9 +1,9 @@
-//const service = require('./service');
+const service = require('./service');
 const response = require('../../network/response');
 
 class Controller {
     constructor() {
-        //this.order = OrdersService;
+        this.order = service;
         this.index = this.index.bind(this);
         this.show = this.show.bind(this);
         this.create = this.create.bind(this);
@@ -14,8 +14,8 @@ class Controller {
 
     async index(req, res, next) {
         try {
-           // const orders = this.order.findAll();
-            response.success(req, res, '', 200);
+           const orders = await this.order.findAll();
+            response.success(req, res, orders, 200);
         } catch (error) {
             next(error);
         }
@@ -24,8 +24,8 @@ class Controller {
     async show(req, res, next) {
         const { id: orderKey } = req.params;
         try {
-            //const order = await this.order.find(orderKey);
-            response.success(req, res, '', 200);
+            const order = await this.order.findByKey(orderKey);
+            response.success(req, res, order, 200);
         } catch (error) {
             next(error);
         }
@@ -34,8 +34,8 @@ class Controller {
     async create(req, res, next) {
         const { body: order } = req;
         try {
-            //const createdOrder = await this.order.create(order);
-            response.success(req, res, '', 201);
+            const createdOrder = await this.order.create(order);
+            response.success(req, res, createdOrder, 201);
         } catch (error) {
             next(error);
         }

@@ -1,35 +1,38 @@
-const ClientsModel = require('../models/ClientsModel');
+const OrdersModel = require('./OrdersModel');
+const OrderArticles = require('./OrderArticlesModel');
 
-class ClientsService {
+class Service {
     constructor() {
-        this.client = ClientsModel;
+        this.order = OrdersModel;
     }
 
     async findAll() {
-        const clients = await this.client.findAll({ order: ['key'] });
-        return clients;
+        const orders = await this.order.findAll({
+            include: ['client', 'order_articles'] 
+        });
+        return orders;
     }
 
-    async find(clientKey) {
-        const client = await this.client.findOne({ where: { key: clientKey}});
-        return client;
+    async findByKey(key) {
+        const order = await this.order.findOne({ where: { order_key: key }, include: ['client', 'order_articles'] });
+        return order;
     }
 
-    async create(client) {
-        const createdClient = await this.client.create(client);
-        return createdClient;
+    async create(order) {
+        const createdorder = await this.order.create(order, { include: ['order_articles'] });
+        return createdorder;
     }
 
-    async update(client, clientKey) {
-        const updatedClient = await this.client.update(client, { key: clientKey });
-        return updatedClient;
+    async update(order, orderKey) {
+        const updatedorder = await this.order.update(order, { key: orderKey });
+        return updatedorder;
     }
 
     async count() {
-        const count = await this.client.count();
+        const count = await this.order.count();
         return count;
     }
 
 }
 
-module.exports = new ClientsService();
+module.exports = new Service();
