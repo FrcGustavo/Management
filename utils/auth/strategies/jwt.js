@@ -9,9 +9,9 @@ passport.use(
             secretOrKey: config.authJwtSecret,
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
         },
-        async function(tokenPayload, cb) {
+        async function(tokenPayload, cb) {            
             try {
-                const user = await UserService.getUser(tokenPayload.email);
+                const user = await UserService.findByEmail(tokenPayload.email);
                 if(!user) {
                     return cb(new Error(''), false);
                 }

@@ -11,8 +11,7 @@ class Controller {
                                 
                 req.login(user, { session: false}, async (error) => {
                     if(error) next(error);
-
-                    const { id: sub, firstName, lastName, avatar, email, permissions } = user;
+                    const { user_id: sub, firstName, lastName, avatar, email, permissions } = user;
                     const payload = { sub, firstName, lastName, avatar, email, permissions };
                     const token = jwt.sign(payload, config.authJwtSecret, {
                         expiresIn: '15min'

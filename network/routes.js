@@ -7,13 +7,15 @@ const ArticleRoutes = require('../components/Articles/ArticleRoutes');
 const CategoryRoutes = require('../components/Categories/CategoryRoutes');
 
 function Network(app) {
-    app.use('/api/auth', auth);    
-    //require('../utils/auth/strategies/jwt');
-    app.use('/api/users', /*passport.authenticate('jwt'),*/ users);
+    require('../utils/auth/strategies/Basic');
+    require('../utils/auth/strategies/jwt');
+    app.use('/api/auth', auth);  
+    app.use(passport.authenticate('jwt', { session: false })); 
+    app.use('/api/users', users);
     app.use('/api/clients', clients);
     app.use('/api/orders', orders);
-    app.use('/api/articles', /*passport.authenticate('jwt'),*/ ArticleRoutes);
-    app.use('/api/categories', /*passport.authenticate('jwt'),*/ CategoryRoutes);
+    app.use('/api/articles', ArticleRoutes);
+    app.use('/api/categories', CategoryRoutes);
 }
 
 module.exports = Network;
