@@ -5,11 +5,12 @@ const morgan = require('morgan');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('./swagger.json');
 
-const { port } = require('./config');
+const config = require('./config');
+const validPublicApiKey = require('./utils/middlewares/validPublicApiKey');
 const Network = require('./network/routes');
-const { logErrors, wrapErrors, errorHandler } = require('./utils/middlewares/errorHandler');
-const notFoundHandler = require('./utils/middlewares/notFoundHandler');
-app.use(cors('*'))
+
+app.use(cors(config.corsOrigin));
+app.use(validPublicApiKey(config));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -28,10 +29,4 @@ app.use((err, req, res, next) => {
     });
 })
 
-/*app.use(  logErrors,
-    wrapErrors,
-    errorHandler);
-app.use(notFoundHandler);
-*/
-
-app.listen(port, () => console.log(`Server is runing in port: ${port}`));
+app.listen(config.port, () => console.log(`Server is runing in port: ${config.port}`));

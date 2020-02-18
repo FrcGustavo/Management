@@ -9,6 +9,8 @@ const config = {
     dbName: process.env.DB_NAME,
     dbType: process.env.DB_TYPE,
     authJwtSecret: process.env.AUTH_JWT_SECRET,
+    publicApiKey: process.env.PUBLIC_API_KEY,
+    corsOrigin: process.env.CORS_ORIGIN,
 }
 
 module.exports = config; 
