@@ -11,8 +11,9 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password TEXT NOT NULL,
     permissions TEXT NOT NULL,
+    active TINYINT(1) DEFAULT 1,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 INSERT INTO users(user_key, firstName, lastName, avatar, email, password, permissions) VALUES 
@@ -55,16 +56,16 @@ INSERT INTO articles(article_key, name, avatar, price, state, visibility, maximu
 CREATE TABLE clients (
     client_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     client_key VARCHAR(6) NOT NULL UNIQUE,
-    firstName VARCHAR(255) NOT NULL,
-    lastName VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     avatar TEXT NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
+    active TINYINT(1) DEFAULT 1,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )
 
-INSERT INTO clients(client_key, firstName, lastName, avatar, email) VALUES
-('C00001','Goguinara sa de cv', '', 'avatar', 'goguinara@mail.com');
+INSERT INTO clients(client_key, name, avatar, email) VALUES
+('C00001','Goguinara sa de cv', 'avatar', 'goguinara@mail.com');
 
 CREATE TABLE "Orders" (
     "id" SERIAL NOT NULL PRIMARY KEY,
