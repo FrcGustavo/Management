@@ -1,17 +1,14 @@
 const express = require('express');
-const OrdersController = require('../controllers/OrdersController');
+const controller = require('./controller');
 
-function OrderRoutes(app) {
-    const router = express.Router();
-    app.use('/api/orders', router);
+const router = express.Router();
 
-    router.get('/count', OrdersController.count)
-    router.route('/')
-        .get(OrdersController.index)
-        .post(OrdersController.create)
-    router.route('/:id')
-        .get(OrdersController.show)
-        .put(OrdersController.update)
-}
+router.route('/')
+    .get(controller.index)
+    .post(controller.create);
+router.route('/:id')
+    .get(controller.show)
+    .put(controller.update)
+    .delete(controller.disable);
 
-module.exports = OrderRoutes;
+module.exports = router;

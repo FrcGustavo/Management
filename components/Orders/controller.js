@@ -1,22 +1,21 @@
-const OrdersService = require('../services/OrdersService');
+//const service = require('./service');
+const response = require('../../network/response');
 
-class OrdersController {
+class Controller {
     constructor() {
-        this.order = OrdersService;
+        //this.order = OrdersService;
         this.index = this.index.bind(this);
         this.show = this.show.bind(this);
         this.create = this.create.bind(this);
         this.update = this.update.bind(this);
+        this.disable = this.disable.bind(this);
         this.count = this.count.bind(this);
     }
 
     async index(req, res, next) {
         try {
-            const orders = this.order.findAll();
-            res.status(200).json({
-                data: orders,
-                message: 'listed orders'
-            });
+           // const orders = this.order.findAll();
+            response.success(req, res, '', 200);
         } catch (error) {
             next(error);
         }
@@ -25,11 +24,8 @@ class OrdersController {
     async show(req, res, next) {
         const { id: orderKey } = req.params;
         try {
-            const order = await this.order.find(orderKey);
-            res.status(200).json({
-                data: order,
-                message: 'retreived order'
-            });
+            //const order = await this.order.find(orderKey);
+            response.success(req, res, '', 200);
         } catch (error) {
             next(error);
         }
@@ -38,11 +34,8 @@ class OrdersController {
     async create(req, res, next) {
         const { body: order } = req;
         try {
-            const createdOrder = await this.order.create(order);
-            res.status(201).json({
-                data: createdOrder,
-                message: 'order created'
-            });
+            //const createdOrder = await this.order.create(order);
+            response.success(req, res, '', 201);
         } catch (error) {
             next(error);
         }
@@ -52,11 +45,16 @@ class OrdersController {
         const { body: order } = req;
         const { id: orderKey } = req.params;
         try {
-            const updatedOrder = await this.order.update(order, orderKey);
-            res.status(200).json({
-                data: updatedOrder,
-                message: 'order updated'
-            });
+            //const updatedOrder = await this.order.update(order, orderKey);
+            response.success(req, res, '', 200);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async disable(req, res, next) {
+        try {
+            response.success(req, res, '', 200);
         } catch (error) {
             next(error);
         }
@@ -75,4 +73,4 @@ class OrdersController {
     }
 }
 
-module.exports = new OrdersController();
+module.exports = new Controller();
